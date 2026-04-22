@@ -1,28 +1,55 @@
-/* Explore Page Interactions */
+/* Explore — Masonry Universe Interactions */
 
 document.addEventListener('DOMContentLoaded', () => {
+    const masonryUniverse = document.getElementById('masonryUniverse');
     const castingModal = document.getElementById('casting-modal');
-    const exploreUniverse = document.getElementById('exploreUniverse');
-    const castButtons = document.querySelectorAll('.btn-cast');
+    const castButtons = document.querySelectorAll('.btn-cast-glow');
     const closeModalBtn = document.getElementById('closeModal');
     const filterTrack = document.getElementById('filterTrack');
 
-    // MODAL LOGIC
+    // 1. SCROLL REVEAL (IntersectionObserver)
+    const revealOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add revealed class with staggered delay
+                const node = entry.target;
+                const delay = node.style.getPropertyValue('--delay') || '0s';
+                
+                setTimeout(() => {
+                    node.classList.add('revealed');
+                }, parseFloat(delay) * 1000);
+                
+                revealObserver.unobserve(node);
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal-node').forEach(node => {
+        revealObserver.observe(node);
+    });
+
+
+    // 2. MODAL LOGIC (Hologram Overlay)
     function openModal() {
         castingModal.classList.remove('hidden');
-        exploreUniverse.classList.add('universe-pushed');
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
+        masonryUniverse.classList.add('universe-pushed');
+        document.body.style.overflow = 'hidden'; // Lock background scroll
     }
 
     function closeModal() {
         castingModal.classList.add('hidden');
-        exploreUniverse.classList.remove('universe-pushed');
+        masonryUniverse.classList.remove('universe-pushed');
         document.body.style.overflow = 'auto';
     }
 
     castButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent card click
+            e.stopPropagation();
             openModal();
         });
     });
@@ -44,46 +71,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // FILTER TRACK DRAG SCROLLING
+    // 3. HORIZONTAL DRAG (Filter Track)
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    filterTrack.addEventListener('mousedown', (e) => {
-        isDown = true;
-        filterTrack.classList.add('active');
-        startX = e.pageX - filterTrack.offsetLeft;
-        scrollLeft = filterTrack.scrollLeft;
-        filterTrack.style.cursor = 'grabbing';
-    });
+    if (filterTrack) {
+        filterTrack.addEventListener('mousedown', (e) => {
+            isDown = true;
+            filterTrack.style.cursor = 'grabbing';
+            startX = e.pageX - filterTrack.offsetLeft;
+            scrollLeft = filterTrack.scrollLeft;
+        });
 
-    filterTrack.addEventListener('mouseleave', () => {
-        isDown = false;
-        filterTrack.style.cursor = 'grab';
-    });
+        filterTrack.addEventListener('mouseleave', () => {
+            isDown = false;
+            filterTrack.style.cursor = 'grab';
+        });
 
-    filterTrack.addEventListener('mouseup', () => {
-        isDown = false;
-        filterTrack.style.cursor = 'grab';
-    });
+        filterTrack.addEventListener('mouseup', () => {
+            isDown = false;
+            filterTrack.style.cursor = 'grab';
+        });
 
-    filterTrack.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - filterTrack.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll speed multiplier
-        filterTrack.scrollLeft = scrollLeft - walk;
-    });
-
-    // Touch support for drag
-    filterTrack.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - filterTrack.offsetLeft;
-        scrollLeft = filterTrack.scrollLeft;
-    });
-
-    filterTrack.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX - filterTrack.offsetLeft;
-        const walk = (x - startX) * 2;
-        filterTrack.scrollLeft = scrollLeft - walk;
-    });
+        filterTrack.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - filterTrack.offsetLeft;
+            const walk = (x - startX) * 2; // speed multiplier
+            filterTrack.scrollLeft = scrollLeft - walk;
+        });
+    }
 });
