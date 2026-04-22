@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signals — Frame</title>
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components/nav.css">
+    <link rel="stylesheet" href="css/pages/messages.css">
+</head>
+<body>
+
+    <!-- Dynamic Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <main class="signals-scene">
+        
+        <!-- SIGNALS LIST: Floating Conversation Sidebar -->
+        <section class="signals-list">
+            <header class="list-header">
+                <h2 class="syne">Signals</h2>
+            </header>
+            
+            <div class="signals-scroll">
+                <!-- Active Signal -->
+                <div class="signal-item active">
+                    <div class="item-avatar">M</div>
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="item-name">Mehak Arora</span>
+                            <span class="item-time">2m ago</span>
+                        </div>
+                        <div class="item-last">Interested in the DOP role?</div>
+                    </div>
+                </div>
+
+                <!-- Signal 2 -->
+                <div class="signal-item">
+                    <div class="item-avatar" style="background: linear-gradient(135deg, #e87e8a, #802030);">S</div>
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="item-name">Siddharth Roy</span>
+                            <span class="item-time">1h ago</span>
+                        </div>
+                        <div class="item-last">The color grade looks sick!</div>
+                    </div>
+                </div>
+
+                <!-- Signal 3 -->
+                <div class="signal-item">
+                    <div class="item-avatar" style="background: linear-gradient(135deg, #a07ee8, #402080);">V</div>
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="item-name">Varun Mehta</span>
+                            <span class="item-time">Yesterday</span>
+                        </div>
+                        <div class="item-last">Sent you the sound stems.</div>
+                    </div>
+                </div>
+
+                <!-- Signal 4 -->
+                <div class="signal-item">
+                    <div class="item-avatar" style="background: linear-gradient(135deg, #e8c97e, #907020);">K</div>
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="item-name">Karan Johar</span>
+                            <span class="item-time">2d ago</span>
+                        </div>
+                        <div class="item-last">Let's discuss the TVC budget.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIGNAL THREAD: Floating Chat Thread -->
+        <section class="signal-thread">
+            <header class="thread-header">
+                <div class="active-avatar">M</div>
+                <div style="flex: 1">
+                    <h3 class="syne" style="font-size: 18px">Mehak Arora</h3>
+                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px">
+                        <div class="active-status"></div>
+                        <span style="font-size: 11px; color: var(--accent-alt)">ACTIVE NOW</span>
+                    </div>
+                </div>
+                <div class="nav-icon" style="font-size: 18px">⚙️</div>
+            </header>
+
+            <div class="messages-area" id="messagesArea">
+                <div class="msg msg-received">Hey! I saw your recent work on Frame. Really impressive cinematography.</div>
+                <div class="msg msg-sent">Thanks, Mehak! Much appreciated. Are you working on any new projects?</div>
+                <div class="msg msg-received">Actually yes, we're looking for a DOP for a short film next month. Interested?</div>
+            </div>
+
+            <footer class="input-area">
+                <div class="input-container">
+                    <input type="text" id="messageInput" placeholder="Transmit a signal…">
+                </div>
+                <button class="send-btn" id="sendBtn">✦</button>
+            </footer>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html>
