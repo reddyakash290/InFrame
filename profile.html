@@ -90,7 +90,7 @@
     <div class="section" style="animation-delay:0.1s">
       <div class="section-header">
         <div class="section-title">Featured Work</div>
-        <button class="section-action" id="viewAllBtn">View All →</button>
+        <a href="portfolio.html" target="_blank" class="section-action" style="text-decoration:none;">View All →</a>
       </div>
       <div class="portfolio-grid">
         <div class="portfolio-item featured">
@@ -213,35 +213,6 @@
     });
   });
 
-  // PORTFOLIO OVERLAY LOGIC
-  const viewAllBtn = document.getElementById('viewAllBtn');
-  const portfolioOverlay = document.getElementById('portfolioOverlay');
-  const closePortfolioBtn = document.getElementById('closePortfolio');
-
-  viewAllBtn.addEventListener('click', () => {
-    portfolioOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
-
-  closePortfolioBtn.addEventListener('click', () => {
-    portfolioOverlay.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  });
-
-  portfolioOverlay.addEventListener('click', (e) => {
-    if (e.target === portfolioOverlay) {
-      portfolioOverlay.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      portfolioOverlay.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  });
-
   let connected = false;
   function toggleConnect() {
     connected = !connected;
@@ -255,33 +226,6 @@
     }
   }
 </script>
-<!-- FULL PORTFOLIO OVERLAY -->
-<div id="portfolioOverlay" class="portfolio-overlay">
-  <div class="portfolio-overlay-inner">
-    <div class="po-header">
-      <div>
-        <h2 class="syne po-title">All Work</h2>
-        <p class="po-sub">Riya Nair · 42 Projects</p>
-      </div>
-      <button class="po-close" id="closePortfolio">×</button>
-    </div>
-    <div class="po-grid">
-      <div class="po-item"><div class="po-thumb v1">🎬<div class="po-over"><div class="po-type">Short Film · DOP</div><div class="po-name">The Salt Farmers of Rann</div><div class="po-year">2024 · MAMI</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v2">📷<div class="po-over"><div class="po-type">Documentary</div><div class="po-name">Monsoon Letters</div><div class="po-year">2023 · IDFA</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v3">🎞️<div class="po-over"><div class="po-type">Music Video</div><div class="po-name">Aakash — Slow Burn</div><div class="po-year">2024</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v4">🌿<div class="po-over"><div class="po-type">Commercial</div><div class="po-name">Fabindia Campaign</div><div class="po-year">2023</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v5">🎭<div class="po-over"><div class="po-type">Short Film</div><div class="po-name">Still Water</div><div class="po-year">2022 · Kashish</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v1">🌊<div class="po-over"><div class="po-type">Documentary</div><div class="po-name">The Fishermen of Kerala</div><div class="po-year">2022</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v2">🔥<div class="po-over"><div class="po-type">Short Film</div><div class="po-name">Embers</div><div class="po-year">2021</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v3">✨<div class="po-over"><div class="po-type">Commercial</div><div class="po-name">Tanishq — Radiance</div><div class="po-year">2022</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v4">🎵<div class="po-over"><div class="po-type">Music Video</div><div class="po-name">Raag by AR Rahman</div><div class="po-year">2023</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v5">🌃<div class="po-over"><div class="po-type">Feature</div><div class="po-name">Night Bazaar</div><div class="po-year">2024 · In Post</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v1">🏔️<div class="po-over"><div class="po-type">Documentary</div><div class="po-name">Above the Treeline</div><div class="po-year">2023</div></div></div></div>
-      <div class="po-item"><div class="po-thumb v2">🌺<div class="po-over"><div class="po-type">Commercial</div><div class="po-name">Forest Essentials</div><div class="po-year">2021</div></div></div></div>
-    </div>
-  </div>
-</div>
-
     <!-- Scripts -->
     <script src="js/components.js"></script>
     <script src="js/transitions.js"></script>
