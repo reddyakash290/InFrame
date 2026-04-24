@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isLogin = true;
 
     // 1. UI TOGGLE LOGIC
-    authToggle.addEventListener('click', (e) => {
-        e.preventDefault();
+    function handleToggle(e) {
+        if (e) e.preventDefault();
         isLogin = !isLogin;
 
         // Reset error message
@@ -39,9 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('fullName').required = true;
         }
 
-        // Re-attach listener to the new anchor
-        document.getElementById('authToggle').addEventListener('click', arguments.callee);
-    });
+        // Re-attach listener because innerHTML destroyed the old element
+        document.getElementById('authToggle').addEventListener('click', handleToggle);
+    }
+
+    authToggle.addEventListener('click', handleToggle);
 
     // 2. FORM INTERCEPTION & BACKEND WIRING
     authForm.addEventListener('submit', async (e) => {
@@ -59,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const endpoint = isLogin ? '/auth/login' : '/auth/signup';
         const payload = isLogin ? { email, password } : { email, password, full_name: fullName };
 
+        console.log(`[AUTH] Attempting ${isLogin ? 'Login' : 'Signup'} at ${endpoint}`);
+        console.log(`[AUTH] Payload:`, payload);
+
         try {
             const response = await fetch(`http://localhost:8000${endpoint}`, {
                 method: 'POST',
@@ -69,33 +74,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const data = await response.json();
+            console.log(`[AUTH] Response:`, data);
 
             if (!response.ok) {
-                throw new Error(data.detail || 'Connection failed. Verify signals.');
+                // Handle Pydantic validation errors or custom detail
+                const msg = data.detail || (data.errors ? JSON.stringify(data.errors) : 'Connection failed.');
+                throw new Error(msg);
             }
 
             // SUCCESS
             if (data.access_token) {
-                // Store JWT token
                 localStorage.setItem('frame_token', data.access_token);
-                
-                // Success feedback
                 submitBtn.style.background = '#fff';
                 submitBtn.textContent = 'Entry Granted';
 
-                // Redirect into the platform
                 setTimeout(() => {
                     window.location.href = 'explore.html';
                 }, 800);
             } else if (!isLogin) {
-                // If signup was successful but didn't auto-login
-                alert("Account created. Please log in.");
-                window.location.reload();
+                alert("Account created successfully. You can now establish your signal.");
+                handleToggle(); // Switch back to login mode
             }
 
         } catch (error) {
             console.error('[AUTH ERROR]', error);
-            errorMessage.textContent = error.message;
+            errorMessage.textContent = `Signal Error: ${error.message}`;
             errorMessage.style.display = 'block';
             submitBtn.disabled = false;
             submitBtn.textContent = isLogin ? 'Enter Frame' : 'Initiate Entry';

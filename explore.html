@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore — Frame Universe</title>
-    
+
     <!-- Core Styles -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/components/nav.css">
     <link rel="stylesheet" href="css/components/hud.css">
     <link rel="stylesheet" href="css/pages/explore.css">
 </head>
+
 <body>
 
     <!-- Dynamic Navigation -->
@@ -224,18 +226,18 @@
                 <h2 class="syne">Casting Call</h2>
                 <p>Establishing a direct signal with this creative node.</p>
             </header>
-            
+
             <form class="hologram-form" onsubmit="return false;">
                 <div class="terminal-group">
                     <label>Project Name</label>
                     <input type="text" placeholder="ENTER_PROJECT_TITLE">
                 </div>
-                
+
                 <div class="terminal-group">
                     <label>Role Needed</label>
                     <input type="text" placeholder="ENTER_TARGET_ROLE">
                 </div>
-                
+
                 <div class="terminal-group">
                     <label>Signal Message</label>
                     <textarea placeholder="DESCRIBE_YOUR_VISION"></textarea>
@@ -247,9 +249,11 @@
     </div>
 
     <!-- Scripts -->
+    <script src="js/api.js"></script>
     <script src="js/components.js"></script>
     <script src="js/hud.js"></script>
     <script src="js/explore.js"></script>
     <script src="js/transitions.js"></script>
 </body>
+
 </html>
