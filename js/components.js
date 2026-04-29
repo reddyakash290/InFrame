@@ -28,7 +28,12 @@ function injectNavigation() {
                     <a href="messages.html" class="nav-icon" style="text-decoration: none;">💬</a>
                     <div class="nav-icon">🔔</div>
                     <button class="btn-primary">Post Work</button>
-                    <div class="avatar-sm">A</div>
+                    <div class="profile-wrapper">
+                        <div class="avatar-sm" id="nav-profile-btn">A</div>
+                        <div class="profile-dropdown" id="nav-profile-dropdown">
+                            <button class="dropdown-item" id="nav-logout-btn">Logout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -44,4 +49,31 @@ function injectNavigation() {
             link.classList.add("active");
         }
     });
+
+    // Profile Dropdown Logic
+    const profileBtn = document.getElementById("nav-profile-btn");
+    const profileDropdown = document.getElementById("nav-profile-dropdown");
+    const logoutBtn = document.getElementById("nav-logout-btn");
+
+    if (profileBtn && profileDropdown) {
+        profileBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle("show");
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove("show");
+            }
+        });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("frame_token");
+            // Assuming auth.html is the login/signup page
+            window.location.href = "auth.html";
+        });
+    }
 }

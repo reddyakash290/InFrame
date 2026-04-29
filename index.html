@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/components/nav.css">
     <link rel="stylesheet" href="css/pages/index.css">
+    <script src="js/guard.js"></script>
 </head>
 <body>
 
@@ -100,147 +101,11 @@
       </div>
     </div>
 
-    <!-- POST 1 — Video -->
-    <div class="post-card" style="animation-delay: 0.05s">
-      <div class="post-header">
-        <div class="post-avatar" style="background: linear-gradient(135deg, #4a90d9, #2c5f8a);">R</div>
-        <div class="post-meta">
-          <div class="post-author">Riya Nair</div>
-          <div class="post-role">Cinematographer · DOP</div>
-          <div class="post-time">2 hours ago · Mumbai</div>
-        </div>
-        <button class="connect-btn-sm">+ Connect</button>
-        <button class="post-more">···</button>
-      </div>
-      <div class="post-text">
-        Just wrapped a two-day outdoor shoot for an indie short. Natural light at golden hour is unbeatable — here's a clip from the behind-the-scenes. Looking to connect with directors working on feature films this year. Open to collaborations!
-      </div>
-      <div class="post-tags">
-        <span class="tag">#Cinematography</span>
-        <span class="tag">#IndieFIlm</span>
-        <span class="tag">#OpenToCollab</span>
-        <span class="tag">#DOP</span>
-      </div>
-      <div class="post-media">
-        <div class="video-preview">
-          <div class="play-btn">▶</div>
-          <div class="video-duration">2:14</div>
-          <div class="video-title">Golden Hour — Reel 2025</div>
-        </div>
-      </div>
-      <div class="post-actions">
-        <button class="action-btn liked">❤️ 214</button>
-        <button class="action-btn">💬 38</button>
-        <button class="action-btn">🔁 Share</button>
-        <button class="action-btn" style="margin-left:auto">🔖</button>
-      </div>
-    </div>
+    <!-- DYNAMIC FEED CONTAINER -->
+    <div id="feed-container"></div>
 
-    <!-- POST 2 — Photo grid -->
-    <div class="post-card" style="animation-delay: 0.1s">
-      <div class="post-header">
-        <div class="post-avatar" style="background: linear-gradient(135deg, #d4a06a, #8b5a2b);">K</div>
-        <div class="post-meta">
-          <div class="post-author">Karan Sethi</div>
-          <div class="post-role">Motion Designer</div>
-          <div class="post-time">5 hours ago · Bangalore</div>
-        </div>
-        <button class="connect-btn-sm">+ Connect</button>
-        <button class="post-more">···</button>
-      </div>
-      <div class="post-text">
-        New brand identity project dropped. Spent 3 weeks on this motion system — super happy with how the kinetic type came together. Drop a 🔥 if you want me to break down the process.
-      </div>
-      <div class="post-tags">
-        <span class="tag">#MotionDesign</span>
-        <span class="tag">#BrandIdentity</span>
-        <span class="tag">#AfterEffects</span>
-      </div>
-      <div class="post-media">
-        <div class="media-grid-2">
-          <div class="media-item design" style="aspect-ratio:1">
-            <span>⬡</span>
-            <span class="media-label">Logo Motion</span>
-          </div>
-          <div class="media-item design" style="aspect-ratio:1">
-            <span>▦</span>
-            <span class="media-label">Type System</span>
-          </div>
-        </div>
-      </div>
-      <div class="post-actions">
-        <button class="action-btn">❤️ 89</button>
-        <button class="action-btn">💬 17</button>
-        <button class="action-btn">🔁 Share</button>
-        <button class="action-btn" style="margin-left:auto">🔖</button>
-      </div>
-    </div>
-
-    <!-- POST 3 — Collab Call -->
-    <div class="post-card" style="animation-delay: 0.15s; border-color: rgba(196,107,58,0.3);">
-      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; padding: 6px 10px; background: rgba(196,107,58,0.08); border-radius: 8px; border: 1px solid rgba(196,107,58,0.2);">
-        <span>🤝</span>
-        <span style="font-size:12px; color: var(--accent2); font-weight:600; text-transform:uppercase; letter-spacing:1px;">Open Collaboration</span>
-      </div>
-      <div class="post-header">
-        <div class="post-avatar" style="background: linear-gradient(135deg, #7bc67a, #2d6b2c);">S</div>
-        <div class="post-meta">
-          <div class="post-author">Sneha Pillai</div>
-          <div class="post-role">Documentary Director</div>
-          <div class="post-time">Yesterday · Delhi</div>
-        </div>
-        <button class="post-more">···</button>
-      </div>
-      <div class="post-text">
-        Casting call for a short documentary on street musicians of Old Delhi. Seeking: <strong style="color:var(--text)">1 Sound Designer</strong>, <strong style="color:var(--text)">1 Editor</strong>, and <strong style="color:var(--text)">1 Production Assistant</strong>. Unpaid but full credit + festival submission. Timeline: 6 weeks. DM me your portfolio!
-      </div>
-      <div class="post-tags">
-        <span class="tag">#DocumentaryFilm</span>
-        <span class="tag">#SoundDesign</span>
-        <span class="tag">#Editing</span>
-        <span class="tag">#Delhi</span>
-      </div>
-      <div class="post-actions">
-        <button class="action-btn">❤️ 56</button>
-        <button class="action-btn">💬 24</button>
-        <button class="action-btn" style="color: var(--accent2); border: 1px solid rgba(196,107,58,0.3); border-radius:8px;">🤝 Apply to Collab</button>
-        <button class="action-btn" style="margin-left:auto">🔖</button>
-      </div>
-    </div>
-
-    <!-- POST 4 — Photo -->
-    <div class="post-card" style="animation-delay: 0.2s">
-      <div class="post-header">
-        <div class="post-avatar" style="background: linear-gradient(135deg, #e87e8a, #8b2d3a);">P</div>
-        <div class="post-meta">
-          <div class="post-author">Priya Sharma</div>
-          <div class="post-role">Editorial Photographer</div>
-          <div class="post-time">2 days ago · Chennai</div>
-        </div>
-        <button class="connect-btn-sm">+ Connect</button>
-        <button class="post-more">···</button>
-      </div>
-      <div class="post-text">
-        Series from last week's editorial shoot for a fashion label. Shot on film, scanned and color-graded in Lightroom. The grain on the 400-ISO stock is everything.
-      </div>
-      <div class="post-tags">
-        <span class="tag">#FilmPhotography</span>
-        <span class="tag">#Editorial</span>
-        <span class="tag">#Fashion</span>
-      </div>
-      <div class="post-media">
-        <div class="media-grid-2">
-          <div class="media-item photo"><span>◉</span><span class="media-label">Shot 1/4</span></div>
-          <div class="media-item photo"><span>◎</span><span class="media-label">Shot 2/4</span></div>
-        </div>
-      </div>
-      <div class="post-actions">
-        <button class="action-btn liked">❤️ 312</button>
-        <button class="action-btn">💬 44</button>
-        <button class="action-btn">🔁 Share</button>
-        <button class="action-btn" style="margin-left:auto">🔖</button>
-      </div>
-    </div>
+    <!-- POST 1 — Video (Removed and handled by feed.js) -->
+    <!-- Posts removed for dynamic loading -->
 
   </main>
 
@@ -403,6 +268,8 @@
   });
 </script>
     <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/feed.js"></script>
     <script src="js/components.js"></script>
     <script src="js/transitions.js"></script>`n</body>
 </html>

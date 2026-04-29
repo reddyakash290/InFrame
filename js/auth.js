@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. FORM INTERCEPTION & BACKEND WIRING
     authForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         // Hide previous errors
         errorMessage.style.display = 'none';
         submitBtn.disabled = true;
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Entry Granted';
 
                 setTimeout(() => {
-                    window.location.href = 'explore.html';
+                    window.location.href = 'index.html';
                 }, 800);
             } else if (!isLogin) {
                 alert("Account created successfully. You can now establish your signal.");

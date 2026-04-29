@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from app.core.database import get_db
-from app.routers import auth
+from app.routers import auth, posts
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="InFrame Backend")
@@ -10,6 +10,7 @@ app = FastAPI(title="InFrame Backend")
 
 
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
+app.include_router(posts.router, prefix="/posts", tags=["Posts"])
 
 app.add_middleware(
     CORSMiddleware,
