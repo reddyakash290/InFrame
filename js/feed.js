@@ -10,7 +10,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadMainFeed();
+    setupComposeBox();
 });
+
+function setupComposeBox() {
+    const postBtn = document.querySelector('.post-btn');
+    const composeInput = document.querySelector('.compose-input');
+
+    if (!postBtn || !composeInput) return;
+
+    postBtn.addEventListener('click', async () => {
+        const content = composeInput.value.trim();
+
+        if (!content) {
+            alert("Please enter some content to post.");
+            return;
+        }
+
+        postBtn.disabled = true;
+        postBtn.textContent = "Posting...";
+
+        try {
+            // Send request to create post
+            const newPost = await apiCall('/posts/', 'POST', {
+                content: content,
+                media_url: null,
+                tags: []
+            });
+
+            console.log("[FEED] Post created successfully:", newPost);
+
+            // Clear input and reset button
+            composeInput.value = '';
+            postBtn.textContent = "Post";
+            postBtn.disabled = false;
+
+            // Prepend the new post directly using the server response
+            const feedContainer = document.getElementById('feed-container');
+            if (feedContainer) {
+                // Pass 0 as index so it appears immediately (no large delay)
+                const newCard = createPostCard(newPost, 0);
+                feedContainer.prepend(newCard);
+                
+                // Re-init interactions for the new card
+                initFeedInteractions();
+            }
+
+        } catch (error) {
+            console.error("[FEED ERROR] Failed to create post:", error);
+            alert(`Failed to post: ${error.message}`);
+            postBtn.textContent = "Post";
+            postBtn.disabled = false;
+        }
+    });
+}
 
 async function loadMainFeed() {
     const feedContainer = document.getElementById('feed-container');
@@ -24,8 +77,8 @@ async function loadMainFeed() {
         const posts = await apiCall('/posts/feed');
         console.log("[FEED] Received posts:", posts);
 
-        // 2. Clear existing (hardcoded) content if any
-        // feedContainer.innerHTML = ''; // We'll do this in index.html cleanup
+        // 2. Clear existing (hardcoded) content
+        feedContainer.innerHTML = '';
 
         // 3. Render posts
         posts.forEach((post, index) => {
@@ -38,7 +91,7 @@ async function loadMainFeed() {
 
     } catch (error) {
         console.error("[FEED ERROR] Failed to load feed:", error);
-        feedContainer.innerHTML += `
+        feedContainer.innerHTML = `
             <div style="padding: 40px; text-align: center; color: var(--text-muted);">
                 <p>Establishing signal lost...</p>
                 <button onclick="loadMainFeed()" class="btn-primary" style="margin-top: 15px;">Retry Sync</button>
@@ -54,7 +107,7 @@ function createPostCard(post, index) {
 
     // Special handling for collab posts
     let collabHeader = '';
-    if (post.media_type === 'collab' || post.is_open_to_collab) {
+    if (post.is_open_to_collab) {
         collabHeader = `
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; padding: 6px 10px; background: rgba(196,107,58,0.08); border-radius: 8px; border: 1px solid rgba(196,107,58,0.2);">
                 <span>🤝</span>
@@ -63,55 +116,53 @@ function createPostCard(post, index) {
         `;
     }
 
-    // Media HTML generation
+    // Media HTML generation (Simplified for now)
     let mediaHTML = '';
-    if (post.media_type === 'video') {
+    if (post.media_url) {
         mediaHTML = `
             <div class="post-media">
-                <div class="video-preview">
-                    <div class="play-btn">▶</div>
-                    <div class="video-duration">2:14</div>
-                    <div class="video-title">Establishing Signal...</div>
-                </div>
-            </div>
-        `;
-    } else if (post.media_type === 'design' || post.media_type === 'photo') {
-        mediaHTML = `
-            <div class="post-media">
-                <div class="media-grid-2">
-                    <div class="media-item design" style="aspect-ratio:1">
-                        <span>⬡</span>
-                    </div>
-                    <div class="media-item design" style="aspect-ratio:1">
-                        <span>▦</span>
-                    </div>
-                </div>
+                <img src="${post.media_url}" alt="Post Media" style="width:100%; border-radius:12px;">
             </div>
         `;
     }
 
+    // Author data handling
+    const authorName = post.full_name || `User-${post.user_id.substring(0, 8)}`;
+    const authorRole = post.role ? post.role : "Role not set";
+    const timeDisplay = post.created_at ? new Date(post.created_at).toLocaleDateString() : "Just now";
+    const likesCount = post.likes_count || 0;
+
+    // Avatar Logic
+    let avatarStyle = `background: var(--accent); color: #000;`;
+    let avatarContent = authorName[0].toUpperCase();
+    
+    if (post.avatar_url) {
+        avatarStyle = `background-image: url(${post.avatar_url}); background-size: cover; background-position: center; color: transparent;`;
+        avatarContent = '';
+    }
+
     card.innerHTML = `
-        ${collabHeader}
+        ${collabHeader || ''}
         <div class="post-header">
-            <div class="post-avatar" style="background: ${post.creator_color || 'var(--accent)'}">${post.creator_name[0]}</div>
+            <div class="post-avatar" style="${avatarStyle}">${avatarContent}</div>
             <div class="post-meta">
-                <div class="post-author">${post.creator_name}</div>
-                <div class="post-role">${post.creator_role}</div>
-                <div class="post-time">${post.time_ago} · ${post.location}</div>
+                <div class="post-author">${authorName}</div>
+                <div class="post-role">${authorRole}</div>
+                <div class="post-time">${timeDisplay} · Matrix</div>
             </div>
             <button class="connect-btn-sm">+ Connect</button>
             <button class="post-more">···</button>
         </div>
         <div class="post-text">
-            ${post.content}
+            ${post.content || ''}
         </div>
         <div class="post-tags">
             ${(post.tags || []).map(tag => `<span class="tag">#${tag}</span>`).join('')}
         </div>
-        ${mediaHTML}
+        ${mediaHTML || ''}
         <div class="post-actions">
-            <button class="action-btn ${post.is_liked ? 'liked' : ''}">❤️ ${post.likes}</button>
-            <button class="action-btn">💬 ${post.comments}</button>
+            <button class="action-btn" onclick="toggleLike(${post.id}, this)">❤️ <span>${likesCount}</span></button>
+            <button class="action-btn">💬 0</button>
             <button class="action-btn">🔁 Share</button>
             <button class="action-btn" style="margin-left:auto">🔖</button>
         </div>
@@ -120,19 +171,31 @@ function createPostCard(post, index) {
     return card;
 }
 
-function initFeedInteractions() {
-    // Re-bind like buttons
-    document.querySelectorAll('.action-btn').forEach(btn => {
-        if (btn.textContent.includes('❤️')) {
-            btn.onclick = function() {
-                this.classList.toggle('liked');
-            };
+async function toggleLike(postId, btn) {
+    try {
+        const response = await apiCall(`/posts/${postId}/like`, 'POST');
+        console.log("[FEED] Like toggled:", response);
+        
+        // Optimistic UI update or refresh
+        const span = btn.querySelector('span');
+        let count = parseInt(span.textContent);
+        
+        if (btn.classList.contains('liked')) {
+            btn.classList.remove('liked');
+            span.textContent = count - 1;
+        } else {
+            btn.classList.add('liked');
+            span.textContent = count + 1;
         }
-    });
+    } catch (error) {
+        console.error("[FEED ERROR] Failed to toggle like:", error);
+    }
+}
 
-    // Re-bind connect buttons
+function initFeedInteractions() {
+    // Connect buttons behavior
     document.querySelectorAll('.connect-btn-sm').forEach(btn => {
-        btn.onclick = function() {
+        btn.onclick = function () {
             if (this.textContent.trim() === '+ Connect') {
                 this.textContent = '✓ Connected';
                 this.style.background = 'rgba(232,201,126,0.1)';

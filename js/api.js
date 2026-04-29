@@ -13,7 +13,7 @@ const BASE_URL = 'http://localhost:8000';
  */
 async function apiCall(endpoint, method = 'GET', body = null) {
     const token = localStorage.getItem('frame_token');
-    
+
     const headers = {
         'Content-Type': 'application/json'
     };
@@ -33,7 +33,7 @@ async function apiCall(endpoint, method = 'GET', body = null) {
 
     try {
         const response = await fetch(`${BASE_URL}${endpoint}`, config);
-        
+
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             throw new Error(errorData.detail || `API Error: ${response.status}`);

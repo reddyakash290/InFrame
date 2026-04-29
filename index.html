@@ -1,275 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame — Creative Network</title>
-    
-    <!-- Core Styles -->
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/components/nav.css">
-    <link rel="stylesheet" href="css/pages/index.css">
-    <script src="js/guard.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frame — Creative Network</title>
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components/nav.css">
+  <link rel="stylesheet" href="css/pages/index.css">
+  <script src="js/guard.js"></script>
 </head>
+
 <body>
 
-    <!-- Dynamic Navigation -->
-    <div id="nav-placeholder"></div>
+  <!-- Dynamic Navigation -->
+  <div id="nav-placeholder"></div>
 
-<!-- APP LAYOUT -->
-<div class="app">
+  <!-- APP LAYOUT -->
+  <div class="app">
 
-  <!-- LEFT SIDEBAR -->
-  <aside class="sidebar">
-    <div class="profile-card">
-      <div class="profile-banner"></div>
-      <div class="profile-info">
-        <div class="profile-avatar-wrap">
-          <div class="profile-avatar">A</div>
-        </div>
-        <div class="profile-name">Arjun Mehta</div>
-        <div class="profile-role">Film Director</div>
-        <div class="profile-stats">
-          <div class="stat">
-            <div class="stat-num">142</div>
-            <div class="stat-label">Connects</div>
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="profile-card">
+        <div class="profile-banner"></div>
+        <div class="profile-info">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar">A</div>
           </div>
-          <div class="stat">
-            <div class="stat-num">38</div>
-            <div class="stat-label">Projects</div>
+          <div class="profile-name">Arjun Mehta</div>
+          <div class="profile-role">Film Director</div>
+          <div class="profile-stats">
+            <div class="stat">
+              <div class="stat-num">142</div>
+              <div class="stat-label">Connects</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">38</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">4.2k</div>
+              <div class="stat-label">Views</div>
+            </div>
           </div>
-          <div class="stat">
-            <div class="stat-num">4.2k</div>
-            <div class="stat-label">Views</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Navigate</div>
+        <div class="nav-link active"><span class="icon">🎬</span> Feed</div>
+        <a href="myprofile.html" class="nav-link"><span class="icon">👤</span> My Profile</a>
+        <a href="portfolio.html" class="nav-link"><span class="icon">🗂️</span> Portfolio</a>
+        <a href="network.html" class="nav-link"><span class="icon">👥</span> My Network</a>
+        <a href="messages.html" class="nav-link"><span class="icon">💬</span> Messages <span class="badge">3</span></a>
+        <a href="explore.html" class="nav-link"><span class="icon">🔍</span> Explore Roles</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">My Roles</div>
+        <div class="nav-link"><span class="icon">🎞️</span> Director</div>
+        <div class="nav-link"><span class="icon">✂️</span> Seeking Editors</div>
+        <div class="nav-link"><span class="icon">🎨</span> Seeking DOP</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Discover</div>
+        <div class="nav-link"><span class="icon">🏆</span> Featured Work</div>
+        <div class="nav-link"><span class="icon">🤝</span> Open Collabs <span class="badge">12</span></div>
+        <div class="nav-link"><span class="icon">🌐</span> Communities</div>
+      </div>
+    </aside>
+
+    <!-- MAIN FEED -->
+    <main class="feed">
+      <div class="feed-header">
+        <h2 class="feed-title syne">Personal Feed</h2>
+        <p class="feed-subtitle">Activity from your creative circle and connections.</p>
+      </div>
+
+      <div class="feed-filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Film & Video</button>
+        <button class="filter-btn">Design</button>
+        <button class="filter-btn">Photography</button>
+        <button class="filter-btn">Music</button>
+        <button class="filter-btn">Collabs Open</button>
+      </div>
+
+      <!-- COMPOSE -->
+      <div class="compose-box">
+        <div class="compose-top">
+          <div class="post-avatar" style="background: linear-gradient(135deg, #e8c97e, #c46b3a);">A</div>
+          <textarea class="compose-input" placeholder="Share your work, thoughts, or open a collab…"></textarea>
+        </div>
+        <div class="compose-actions">
+          <button class="compose-action">🎬 Video</button>
+          <button class="compose-action">🖼️ Photo</button>
+          <button class="compose-action">🤝 Collab</button>
+          <button class="post-btn">Post</button>
+        </div>
+      </div>
+
+      <!-- DYNAMIC FEED CONTAINER -->
+      <div id="feed-container"></div>
+
+      <!-- POST 1 — Video (Removed and handled by feed.js) -->
+      <!-- Posts removed for dynamic loading -->
+
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-panel">
+
+      <!-- Suggested Connections -->
+      <div class="panel-card">
+        <div class="panel-title">
+          People to Connect <a>See all</a>
+        </div>
+
+        <div class="suggest-item">
+          <div class="suggest-avatar" style="background: linear-gradient(135deg, #78b4f5, #2c5fa0);">V</div>
+          <div class="suggest-info">
+            <div class="suggest-name">Vikram Anand</div>
+            <div class="suggest-role">Film Editor</div>
+            <div class="suggest-mutual">3 mutual connects</div>
+          </div>
+          <button class="connect-btn">Connect</button>
+        </div>
+
+        <div class="suggest-item">
+          <div class="suggest-avatar" style="background: linear-gradient(135deg, #f5c878, #c47820);">M</div>
+          <div class="suggest-info">
+            <div class="suggest-name">Meera Joshi</div>
+            <div class="suggest-role">Sound Designer</div>
+            <div class="suggest-mutual">5 mutual connects</div>
+          </div>
+          <button class="connect-btn">Connect</button>
+        </div>
+
+        <div class="suggest-item">
+          <div class="suggest-avatar" style="background: linear-gradient(135deg, #a0e878, #3a8020);">D</div>
+          <div class="suggest-info">
+            <div class="suggest-name">Dev Kulkarni</div>
+            <div class="suggest-role">Colorist · VFX</div>
+            <div class="suggest-mutual">2 mutual connects</div>
+          </div>
+          <button class="connect-btn">Connect</button>
+        </div>
+
+        <div class="suggest-item">
+          <div class="suggest-avatar" style="background: linear-gradient(135deg, #e87878, #a02020);">N</div>
+          <div class="suggest-info">
+            <div class="suggest-name">Naina Reddy</div>
+            <div class="suggest-role">Screenwriter</div>
+            <div class="suggest-mutual">7 mutual connects</div>
+          </div>
+          <button class="connect-btn">Connect</button>
+        </div>
+
+      </div>
+
+      <!-- Trending -->
+      <div class="panel-card">
+        <div class="panel-title">
+          Trending on Frame <a>Explore</a>
+        </div>
+
+        <div class="trend-item">
+          <div class="trend-num">1</div>
+          <div class="trend-info">
+            <div class="trend-tag">#IndieCinema</div>
+            <div class="trend-count">2.4k posts this week</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-num">2</div>
+          <div class="trend-info">
+            <div class="trend-tag">#MotionDesign</div>
+            <div class="trend-count">1.8k posts this week</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-num">3</div>
+          <div class="trend-info">
+            <div class="trend-tag">#OpenToCollab</div>
+            <div class="trend-count">1.2k posts this week</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-num">4</div>
+          <div class="trend-info">
+            <div class="trend-tag">#SoundDesign</div>
+            <div class="trend-count">980 posts this week</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-title">Navigate</div>
-      <div class="nav-link active"><span class="icon">🎬</span> Feed</div>
-      <a href="myprofile.html" class="nav-link"><span class="icon">👤</span> My Profile</a>
-      <a href="portfolio.html" class="nav-link"><span class="icon">🗂️</span> Portfolio</a>
-      <a href="network.html" class="nav-link"><span class="icon">👥</span> My Network</a>
-      <a href="messages.html" class="nav-link"><span class="icon">💬</span> Messages <span class="badge">3</span></a>
-      <a href="explore.html" class="nav-link"><span class="icon">🔍</span> Explore Roles</a>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-title">My Roles</div>
-      <div class="nav-link"><span class="icon">🎞️</span> Director</div>
-      <div class="nav-link"><span class="icon">✂️</span> Seeking Editors</div>
-      <div class="nav-link"><span class="icon">🎨</span> Seeking DOP</div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-title">Discover</div>
-      <div class="nav-link"><span class="icon">🏆</span> Featured Work</div>
-      <div class="nav-link"><span class="icon">🤝</span> Open Collabs <span class="badge">12</span></div>
-      <div class="nav-link"><span class="icon">🌐</span> Communities</div>
-    </div>
-  </aside>
-
-  <!-- MAIN FEED -->
-  <main class="feed">
-    <div class="feed-header">
-      <h2 class="feed-title syne">Personal Feed</h2>
-      <p class="feed-subtitle">Activity from your creative circle and connections.</p>
-    </div>
-
-    <div class="feed-filters">
-      <button class="filter-btn active">All</button>
-      <button class="filter-btn">Film & Video</button>
-      <button class="filter-btn">Design</button>
-      <button class="filter-btn">Photography</button>
-      <button class="filter-btn">Music</button>
-      <button class="filter-btn">Collabs Open</button>
-    </div>
-
-    <!-- COMPOSE -->
-    <div class="compose-box">
-      <div class="compose-top">
-        <div class="post-avatar" style="background: linear-gradient(135deg, #e8c97e, #c46b3a);">A</div>
-        <textarea class="compose-input" placeholder="Share your work, thoughts, or open a collab…"></textarea>
-      </div>
-      <div class="compose-actions">
-        <button class="compose-action">🎬 Video</button>
-        <button class="compose-action">🖼️ Photo</button>
-        <button class="compose-action">🤝 Collab</button>
-        <button class="post-btn">Post</button>
-      </div>
-    </div>
-
-    <!-- DYNAMIC FEED CONTAINER -->
-    <div id="feed-container"></div>
-
-    <!-- POST 1 — Video (Removed and handled by feed.js) -->
-    <!-- Posts removed for dynamic loading -->
-
-  </main>
-
-  <!-- RIGHT PANEL -->
-  <aside class="right-panel">
-
-    <!-- Suggested Connections -->
-    <div class="panel-card">
-      <div class="panel-title">
-        People to Connect <a>See all</a>
-      </div>
-
-      <div class="suggest-item">
-        <div class="suggest-avatar" style="background: linear-gradient(135deg, #78b4f5, #2c5fa0);">V</div>
-        <div class="suggest-info">
-          <div class="suggest-name">Vikram Anand</div>
-          <div class="suggest-role">Film Editor</div>
-          <div class="suggest-mutual">3 mutual connects</div>
+      <!-- Opportunities -->
+      <div class="panel-card">
+        <div class="panel-title">
+          Open Opportunities <a>Browse all</a>
         </div>
-        <button class="connect-btn">Connect</button>
-      </div>
 
-      <div class="suggest-item">
-        <div class="suggest-avatar" style="background: linear-gradient(135deg, #f5c878, #c47820);">M</div>
-        <div class="suggest-info">
-          <div class="suggest-name">Meera Joshi</div>
-          <div class="suggest-role">Sound Designer</div>
-          <div class="suggest-mutual">5 mutual connects</div>
+        <div class="opp-item">
+          <div class="opp-title">Editor needed — Short Film</div>
+          <div class="opp-meta">Posted by Aryan Das · Mumbai</div>
+          <span class="opp-badge collab">Collab</span>
         </div>
-        <button class="connect-btn">Connect</button>
-      </div>
-
-      <div class="suggest-item">
-        <div class="suggest-avatar" style="background: linear-gradient(135deg, #a0e878, #3a8020);">D</div>
-        <div class="suggest-info">
-          <div class="suggest-name">Dev Kulkarni</div>
-          <div class="suggest-role">Colorist · VFX</div>
-          <div class="suggest-mutual">2 mutual connects</div>
+        <div class="opp-item">
+          <div class="opp-title">Colorist for Music Video</div>
+          <div class="opp-meta">Posted by Label Zero · Bangalore</div>
+          <span class="opp-badge hire">Paid</span>
         </div>
-        <button class="connect-btn">Connect</button>
-      </div>
-
-      <div class="suggest-item">
-        <div class="suggest-avatar" style="background: linear-gradient(135deg, #e87878, #a02020);">N</div>
-        <div class="suggest-info">
-          <div class="suggest-name">Naina Reddy</div>
-          <div class="suggest-role">Screenwriter</div>
-          <div class="suggest-mutual">7 mutual connects</div>
+        <div class="opp-item">
+          <div class="opp-title">DOP for Brand Campaign</div>
+          <div class="opp-meta">Posted by Craft Studio · Delhi</div>
+          <span class="opp-badge hire">Paid</span>
         </div>
-        <button class="connect-btn">Connect</button>
+
       </div>
 
-    </div>
+    </aside>
 
-    <!-- Trending -->
-    <div class="panel-card">
-      <div class="panel-title">
-        Trending on Frame <a>Explore</a>
-      </div>
+  </div>
 
-      <div class="trend-item">
-        <div class="trend-num">1</div>
-        <div class="trend-info">
-          <div class="trend-tag">#IndieCinema</div>
-          <div class="trend-count">2.4k posts this week</div>
-        </div>
-      </div>
-      <div class="trend-item">
-        <div class="trend-num">2</div>
-        <div class="trend-info">
-          <div class="trend-tag">#MotionDesign</div>
-          <div class="trend-count">1.8k posts this week</div>
-        </div>
-      </div>
-      <div class="trend-item">
-        <div class="trend-num">3</div>
-        <div class="trend-info">
-          <div class="trend-tag">#OpenToCollab</div>
-          <div class="trend-count">1.2k posts this week</div>
-        </div>
-      </div>
-      <div class="trend-item">
-        <div class="trend-num">4</div>
-        <div class="trend-info">
-          <div class="trend-tag">#SoundDesign</div>
-          <div class="trend-count">980 posts this week</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Opportunities -->
-    <div class="panel-card">
-      <div class="panel-title">
-        Open Opportunities <a>Browse all</a>
-      </div>
-
-      <div class="opp-item">
-        <div class="opp-title">Editor needed — Short Film</div>
-        <div class="opp-meta">Posted by Aryan Das · Mumbai</div>
-        <span class="opp-badge collab">Collab</span>
-      </div>
-      <div class="opp-item">
-        <div class="opp-title">Colorist for Music Video</div>
-        <div class="opp-meta">Posted by Label Zero · Bangalore</div>
-        <span class="opp-badge hire">Paid</span>
-      </div>
-      <div class="opp-item">
-        <div class="opp-title">DOP for Brand Campaign</div>
-        <div class="opp-meta">Posted by Craft Studio · Delhi</div>
-        <span class="opp-badge hire">Paid</span>
-      </div>
-
-    </div>
-
-  </aside>
-
-</div>
-
-<script>
-  // Filter buttons
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  <script>
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
     });
-  });
 
-  // Connect buttons
-  document.querySelectorAll('.connect-btn, .connect-btn-sm').forEach(btn => {
-    btn.addEventListener('click', function() {
-      if (this.textContent.trim() === 'Connect' || this.textContent.trim() === '+ Connect') {
-        this.textContent = '✓ Connected';
-        this.style.background = 'rgba(232,201,126,0.1)';
-        this.style.color = 'var(--accent)';
-        this.style.cursor = 'default';
+    // Connect buttons
+    document.querySelectorAll('.connect-btn, .connect-btn-sm').forEach(btn => {
+      btn.addEventListener('click', function () {
+        if (this.textContent.trim() === 'Connect' || this.textContent.trim() === '+ Connect') {
+          this.textContent = '✓ Connected';
+          this.style.background = 'rgba(232,201,126,0.1)';
+          this.style.color = 'var(--accent)';
+          this.style.cursor = 'default';
+        }
+      });
+    });
+
+    // Like buttons
+    document.querySelectorAll('.action-btn').forEach(btn => {
+      if (btn.textContent.includes('❤️')) {
+        btn.addEventListener('click', function () {
+          this.classList.toggle('liked');
+        });
       }
     });
-  });
 
-  // Like buttons
-  document.querySelectorAll('.action-btn').forEach(btn => {
-    if (btn.textContent.includes('❤️')) {
-      btn.addEventListener('click', function() {
-        this.classList.toggle('liked');
-      });
-    }
-  });
-
-  // Compose expand
-  document.querySelector('.compose-input').addEventListener('focus', function() {
-    this.style.height = '80px';
-  });
-
-  // Nav links
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function() {
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
+    // Compose expand
+    document.querySelector('.compose-input').addEventListener('focus', function () {
+      this.style.height = '80px';
     });
-  });
-</script>
-    <!-- Scripts -->
-    <script src="js/api.js"></script>
-    <script src="js/feed.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/transitions.js"></script>`n</body>
+
+    // Nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/user-sync.js"></script>
+  <script src="js/feed.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/transitions.js"></script>`n
+</body>
+
 </html>

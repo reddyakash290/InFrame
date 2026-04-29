@@ -1,77 +1,135 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import text
 from typing import List, Optional
 from pydantic import BaseModel
+from app.core.database import get_db
+from app.core.auth import get_current_user
+import datetime
 
 router = APIRouter()
 
-class Post(BaseModel):
-    id: int
-    creator_name: str
-    creator_role: str
-    creator_id: str
-    creator_color: Optional[str] = None
-    time_ago: str
-    location: str
-    content: str
-    tags: List[str]
-    media_type: str # 'video', 'photo', 'design', 'collab'
-    media_url: Optional[str] = None
-    likes: int
-    comments: int
-    is_liked: bool = False
-    is_open_to_collab: bool = False
+# --- SCHEMAS ---
 
-@router.get("/feed", response_model=List[Post])
-async def get_feed():
-    # Mock data mirroring the cinematic aesthetic of InFrame
-    return [
-        {
-            "id": 1,
-            "creator_name": "Riya Nair",
-            "creator_role": "Cinematographer · DOP",
-            "creator_id": "riya_nair",
-            "creator_color": "linear-gradient(135deg, #4a90d9, #2c5f8a)",
-            "time_ago": "2 hours ago",
-            "location": "Mumbai",
-            "content": "Just wrapped a two-day outdoor shoot for an indie short. Natural light at golden hour is unbeatable — here's a clip from the behind-the-scenes. Looking to connect with directors working on feature films this year.",
-            "tags": ["Cinematography", "IndieFilm", "OpenToCollab", "DOP"],
-            "media_type": "video",
-            "media_url": None, # In a real app, this would be a URL
-            "likes": 214,
-            "comments": 38,
-            "is_liked": True,
-            "is_open_to_collab": True
-        },
-        {
-            "id": 2,
-            "creator_name": "Karan Sethi",
-            "creator_role": "Motion Designer",
-            "creator_id": "karan_sethi",
-            "creator_color": "linear-gradient(135deg, #d4a06a, #8b5a2b)",
-            "time_ago": "5 hours ago",
-            "location": "Bangalore",
-            "content": "New brand identity project dropped. Spent 3 weeks on this motion system — super happy with how the kinetic type came together. Drop a 🔥 if you want me to break down the process.",
-            "tags": ["MotionDesign", "BrandIdentity", "AfterEffects"],
-            "media_type": "design",
-            "media_url": None,
-            "likes": 89,
-            "comments": 17,
-            "is_liked": False
-        },
-        {
-            "id": 3,
-            "creator_name": "Sneha Pillai",
-            "creator_role": "Documentary Director",
-            "creator_id": "sneha_pillai",
-            "creator_color": "linear-gradient(135deg, #7bc67a, #2d6b2c)",
-            "time_ago": "Yesterday",
-            "location": "Delhi",
-            "content": "Casting call for a short documentary on street musicians of Old Delhi. Seeking: 1 Sound Designer, 1 Editor, and 1 Production Assistant. Unpaid but full credit + festival submission.",
-            "tags": ["DocumentaryFilm", "SoundDesign", "Editing", "Delhi"],
-            "media_type": "collab",
-            "media_url": None,
-            "likes": 56,
-            "comments": 24,
-            "is_open_to_collab": True
-        }
-    ]
+class PostCreate(BaseModel):
+    content: str
+    media_url: Optional[str] = None
+    tags: Optional[List[str]] = []
+
+class PostResponse(BaseModel):
+    id: int
+    user_id: str
+    full_name: Optional[str]
+    avatar_url: Optional[str]
+    content: str
+    media_url: Optional[str]
+    tags: List[str]
+    created_at: datetime.datetime
+    likes_count: int
+
+# --- ENDPOINTS ---
+
+@router.get("/feed", response_model=List[PostResponse])
+async def get_feed(db: AsyncSession = Depends(get_db)):
+    """
+    Public route to fetch the global feed.
+    Joins with post_likes to get the count.
+    """
+    query = text("""
+        SELECT p.id, p.user_id::text, p.content, p.media_url, p.tags, p.created_at,
+               u.full_name, u.avatar_url,
+               COUNT(l.id) as likes_count
+        FROM posts p
+        LEFT JOIN users u ON p.user_id::uuid = u.id::uuid
+        LEFT JOIN post_likes l ON p.id = l.post_id
+        GROUP BY p.id, u.full_name, u.avatar_url
+        ORDER BY p.created_at DESC
+        LIMIT 20
+    """)
+    
+    result = await db.execute(query)
+    # Use .mappings().all() to return a list of dictionaries that match the schema
+    posts = result.mappings().all()
+    return posts
+
+@router.post("/", status_code=status.HTTP_201_CREATED)
+async def create_post(
+    post: PostCreate, 
+    db: AsyncSession = Depends(get_db),
+    current_user_id: str = Depends(get_current_user)
+):
+    """
+    Protected route to create a new post.
+    """
+    query = text("""
+        INSERT INTO posts (user_id, content, media_url, tags)
+        VALUES (:user_id, :content, :media_url, :tags)
+        RETURNING id
+    """)
+    
+    try:
+        result = await db.execute(query, {
+            "user_id": current_user_id,
+            "content": post.content,
+            "media_url": post.media_url,
+            "tags": post.tags
+        })
+        await db.commit()
+        new_post_id = result.scalar()
+
+        # Fetch the fully joined data for the new post
+        fetch_query = text("""
+            SELECT 
+                p.id, p.user_id::text, p.content, p.media_url, p.tags, p.created_at,
+                u.full_name, u.avatar_url,
+                0 as likes_count
+            FROM posts p
+            LEFT JOIN users u ON p.user_id::uuid = u.id::uuid
+            WHERE p.id = :new_post_id
+        """)
+        
+        result = await db.execute(fetch_query, {"new_post_id": new_post_id})
+        return result.mappings().first()
+
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+
+@router.post("/{post_id}/like")
+async def toggle_like(
+    post_id: int,
+    db: AsyncSession = Depends(get_db),
+    current_user_id: str = Depends(get_current_user)
+):
+    """
+    Protected route to toggle a like on a post.
+    """
+    # Check if like exists
+    check_query = text("""
+        SELECT id FROM post_likes 
+        WHERE post_id = :post_id AND user_id = :user_id
+    """)
+    
+    result = await db.execute(check_query, {"post_id": post_id, "user_id": current_user_id})
+    existing_like = result.scalar()
+    
+    if existing_like:
+        # Remove like
+        delete_query = text("DELETE FROM post_likes WHERE id = :like_id")
+        await db.execute(delete_query, {"like_id": existing_like})
+        action = "unliked"
+    else:
+        # Add like
+        insert_query = text("""
+            INSERT INTO post_likes (post_id, user_id)
+            VALUES (:post_id, :user_id)
+        """)
+        await db.execute(insert_query, {"post_id": post_id, "user_id": current_user_id})
+        action = "liked"
+    
+    try:
+        await db.commit()
+        return {"message": f"Post {action} successfully"}
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
