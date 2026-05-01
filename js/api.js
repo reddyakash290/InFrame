@@ -34,6 +34,14 @@ async function apiCall(endpoint, method = 'GET', body = null) {
     try {
         const response = await fetch(`${BASE_URL}${endpoint}`, config);
 
+        // Global 401 Interceptor: Session Expired
+        if (response.status === 401) {
+            console.warn("[API] Session expired (401). Redirecting to login...");
+            localStorage.removeItem('frame_token');
+            window.location.href = 'auth.html';
+            return null;
+        }
+
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             throw new Error(errorData.detail || `API Error: ${response.status}`);

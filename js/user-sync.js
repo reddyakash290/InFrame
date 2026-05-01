@@ -16,6 +16,35 @@ async function loadCurrentUserData() {
         const user = await apiCall('/users/me');
         console.log("[USER-SYNC] Profile loaded:", user);
 
+        if (user && user.stats) {
+            console.log("Attempting to map stats to DOM...");
+
+            const elConnections = document.getElementById('stat-connections');
+            if (elConnections) {
+                elConnections.innerText = user.stats.connections;
+                console.log("✅ Mapped connections successfully!");
+            } else {
+                console.error("❌ Could NOT find HTML element with id 'stat-connections'");
+            }
+
+            const elProjects = document.getElementById('stat-projects');
+            if (elProjects) {
+                elProjects.innerText = user.stats.projects;
+                console.log("✅ Mapped projects successfully!");
+            } else {
+                console.error("❌ Could NOT find HTML element with id 'stat-projects'");
+            }
+
+            const elViews = document.getElementById('stat-views');
+            if (elViews) elViews.innerText = user.stats.views;
+
+            const elCredits = document.getElementById('stat-credits');
+            if (elCredits) elCredits.innerText = user.stats.festival_credits;
+
+            const elResponseRate = document.getElementById('stat-response-rate');
+            if (elResponseRate) elResponseRate.innerText = user.stats.response_rate;
+        }
+
         if (user) {
             updateNavbar(user);
             updateSidebar(user);
@@ -125,5 +154,46 @@ function updateProfilePage(user) {
         if (aboutSections[1]) {
             aboutSections[1].style.display = user.bio ? 'block' : 'none';
         }
+    }
+
+    // Load Portfolio Items
+    loadPortfolioData();
+}
+
+/**
+ * Fetches and renders the user's portfolio items
+ */
+async function loadPortfolioData() {
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    if (!portfolioGrid) return;
+
+    try {
+        const items = await apiCall('/users/me/portfolio');
+        console.log("[USER-SYNC] Portfolio items loaded:", items);
+
+        if (items && items.length > 0) {
+            portfolioGrid.innerHTML = items.map((item, index) => `
+                <div class="portfolio-item ${index === 0 ? 'featured' : ''}">
+                    <div class="port-thumb" style="${item.media_url ? `background-image: url(${item.media_url}); background-size: cover; background-position: center;` : 'background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 40px;'}">
+                        ${item.media_url ? '' : '🎬'}
+                        <div class="port-play">▶</div>
+                        <div class="port-overlay">
+                            <div class="port-type">${item.project_type}</div>
+                            <div class="port-title">${item.title}</div>
+                            <div class="port-year">${item.year}</div>
+                        </div>
+                    </div>
+                    <div class="port-info">
+                        <div class="port-info-title">${item.title}</div>
+                        <div class="port-info-sub">${item.project_type} · ${item.year}</div>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            portfolioGrid.innerHTML = '<div class="no-data" style="padding: 40px; text-align: center; color: var(--muted); border: 1px dashed var(--border2); border-radius: 12px; grid-column: 1 / -1;">No portfolio items added yet.</div>';
+        }
+    } catch (error) {
+        console.error("[USER-SYNC ERROR] Failed to fetch portfolio:", error);
+        portfolioGrid.innerHTML = '<div class="no-data" style="padding: 40px; text-align: center; color: var(--accent-red); grid-column: 1 / -1;">Error loading portfolio.</div>';
     }
 }
