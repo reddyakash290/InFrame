@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore — Frame Universe</title>
+
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components/nav.css">
+    <link rel="stylesheet" href="css/components/hud.css">
+    <link rel="stylesheet" href="css/pages/explore.css">
+    <script src="js/guard.js"></script>
+</head>
+
+<body>
+
+    <!-- Dynamic Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- EXPLORE HUD -->
+    <header class="explore-hud">
+        <div class="hud-container">
+            <div class="filter-track" id="filterTrack">
+                <button class="filter-pill active">For You</button>
+                <button class="filter-pill">Trending</button>
+                <button class="filter-pill">Cinematography</button>
+                <button class="filter-pill">VFX Breakdown</button>
+                <button class="filter-pill">Sound Design</button>
+                <button class="filter-pill">Color Grading</button>
+                <button class="filter-pill">Behind the Scenes</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MASONRY UNIVERSE -->
+    <main class="masonry-universe" id="masonryUniverse">
+        <!-- Node 1: 16:9 -->
+        <div class="explore-node reveal-node" style="--delay: 0.1s">
+            <div class="node-media v1" style="aspect-ratio: 16/9">🎬</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar">R</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Riya Nair</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#16mmFilm</span>
+                    <span>#ArriAlexa</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+
+        <!-- Node 2: 9:16 -->
+        <div class="explore-node reveal-node" style="--delay: 0.2s">
+            <div class="node-media v2" style="aspect-ratio: 9/16">📷</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar" style="background: var(--accent-alt)">M</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Mehak Arora</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#Directing</span>
+                    <span>#Experimental</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+
+        <!-- Node 3: 4:3 -->
+        <div class="explore-node reveal-node" style="--delay: 0.3s">
+            <div class="node-media v3" style="aspect-ratio: 4/3">🎞️</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar" style="background: #a07ee8">S</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Siddharth Roy</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#ColorGrade</span>
+                    <span>#DaVinci</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+
+        <!-- Node 4: 1:1 -->
+        <div class="explore-node reveal-node" style="--delay: 0.4s">
+            <div class="node-media v4" style="aspect-ratio: 1/1">✨</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar" style="background: #e8c97e">K</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Karan J.</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#UnrealEngine</span>
+                    <span>#VFX</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+
+        <!-- Node 5: 16:9 -->
+        <div class="explore-node reveal-node" style="--delay: 0.5s">
+            <div class="node-media v5" style="aspect-ratio: 16:9">🌿</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar">V</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Varun M.</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#SoundDesign</span>
+                    <span>#Ambient</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+
+        <!-- Node 6: 4:5 -->
+        <div class="explore-node reveal-node" style="--delay: 0.6s">
+            <div class="node-media v1" style="aspect-ratio: 4/5">🎭</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar">D</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Deepika P.</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#ArtDirection</span>
+                    <span>#SetDesign</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+
+        <!-- Node 7: 9:16 -->
+        <div class="explore-node reveal-node" style="--delay: 0.7s">
+            <div class="node-media v2" style="aspect-ratio: 9/16">🔥</div>
+            <div class="node-overlay">
+                <a href="profile.html" class="creator-mini-link" style="text-decoration: none;">
+                    <div class="creator-mini">
+                        <div class="mini-avatar">A</div>
+                        <div class="mini-info">
+                            <span class="mini-name">Aryan K.</span>
+                            <div class="avail-indicator">
+                                <div class="avail-dot"></div>
+                                <span>Open to Collab</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="node-content">
+                <div class="node-tags">
+                    <span>#Motion</span>
+                    <span>#AfterEffects</span>
+                </div>
+                <button class="btn-cast-glow">Cast</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- CASTING MODAL (Hologram Overlay) -->
+    <div id="casting-modal" class="hologram-overlay hidden">
+        <div class="hologram-modal">
+            <button class="modal-close" id="closeModal">×</button>
+            <header class="hologram-header">
+                <h2 class="syne">Casting Call</h2>
+                <p>Establishing a direct signal with this creative node.</p>
+            </header>
+
+            <form class="hologram-form" onsubmit="return false;">
+                <div class="terminal-group">
+                    <label>Project Name</label>
+                    <input type="text" placeholder="ENTER_PROJECT_TITLE">
+                </div>
+
+                <div class="terminal-group">
+                    <label>Role Needed</label>
+                    <input type="text" placeholder="ENTER_TARGET_ROLE">
+                </div>
+
+                <div class="terminal-group">
+                    <label>Signal Message</label>
+                    <textarea placeholder="DESCRIBE_YOUR_VISION"></textarea>
+                </div>
+
+                <button class="btn-glow-send">Send Casting Call</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/user-sync.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/hud.js"></script>
+    <script src="js/explore.js"></script>
+    <script src="js/transitions.js"></script>
+</body>
+
+</html>

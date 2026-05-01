@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airlock — InFrame Entry</title>
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/auth.css">
+    <script src="js/guard.js"></script>
+</head>
+<body class="airlock-body">
+
+    <!-- Background Cinematic Glow -->
+    <div class="airlock-glow"></div>
+
+    <main class="airlock-container">
+        <div class="airlock-panel">
+            <header class="airlock-header">
+                <div class="logo-large syne">Frame<span></span></div>
+                <h1 class="syne" id="authTitle">Airlock Login</h1>
+                <p id="authSubtitle">Establishing a secure connection to the universe.</p>
+            </header>
+
+            <form id="authForm" class="airlock-form">
+                <div class="input-group" id="nameGroup" style="display: none;">
+                    <input type="text" id="fullName" placeholder=" " autocomplete="name">
+                    <label for="fullName">Full Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" required placeholder=" " autocomplete="email">
+                    <label for="email">Email Signal</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" required placeholder=" " autocomplete="current-password">
+                    <label for="password">Access Code</label>
+                </div>
+
+                <div id="errorMessage" class="error-glow" style="display: none;"></div>
+
+                <button type="submit" class="btn-entry syne" id="submitBtn">Enter Frame</button>
+            </form>
+
+            <footer class="airlock-footer">
+                <p id="toggleText">No access code? <a href="#" id="authToggle">Request entry</a></p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

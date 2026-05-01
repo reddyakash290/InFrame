@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network — InFrame</title>
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components/nav.css">
+    <link rel="stylesheet" href="css/components/hud.css">
+    <link rel="stylesheet" href="css/pages/network.css">
+    <script src="js/guard.js"></script>
+</head>
+<body>
+
+    <!-- Dynamic Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- HUD (Secondary Nav) -->
+    <header class="explore-hud">
+        <div class="hud-container">
+            <div class="filter-track" id="filterTrack">
+                <button class="filter-pill active">All Creatives</button>
+                <button class="filter-pill">Available Now</button>
+                <button class="filter-pill">Cinematographers</button>
+                <button class="filter-pill">Editors</button>
+                <button class="filter-pill">Directors</button>
+                <button class="filter-pill">Actors</button>
+                <button class="filter-pill">Sound Designers</button>
+                <button class="filter-pill">Colorists</button>
+                <button class="filter-pill">VFX Artists</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="network-container">
+        <header class="network-header">
+            <h1 class="syne">Creative Network</h1>
+            <p>Connect with the industry's most talented directors, editors, and cinematographers.</p>
+        </header>
+
+        <div class="network-grid">
+            <!-- User 1 -->
+            <a href="profile.html" class="user-card" style="animation-delay: 0.1s;">
+                <div class="user-avatar-wrap">
+                    <div class="user-avatar">R</div>
+                    <div class="user-status"></div>
+                </div>
+                <div class="user-name">Riya Nair</div>
+                <div class="user-role">Cinematographer</div>
+                <div class="user-tags">
+                    <span class="user-tag">ARRI</span>
+                    <span class="user-tag">Documentary</span>
+                </div>
+                <div class="user-stats">
+                    <div class="u-stat"><span class="u-num">284</span><span class="u-label">Connects</span></div>
+                    <div class="u-stat"><span class="u-num">42</span><span class="u-label">Projects</span></div>
+                </div>
+                <button class="card-action">View Profile</button>
+            </a>
+
+            <!-- User 2 -->
+            <a href="profile.html" class="user-card" style="animation-delay: 0.2s;">
+                <div class="user-avatar-wrap" style="--accent: #4ecb94;">
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #4ecb94, #2a8c61);">M</div>
+                </div>
+                <div class="user-name">Mehak Arora</div>
+                <div class="user-role">Film Director</div>
+                <div class="user-tags">
+                    <span class="user-tag">Narrative</span>
+                    <span class="user-tag">Indie</span>
+                </div>
+                <div class="user-stats">
+                    <div class="u-stat"><span class="u-num">1.2k</span><span class="u-label">Connects</span></div>
+                    <div class="u-stat"><span class="u-num">15</span><span class="u-label">Projects</span></div>
+                </div>
+                <button class="card-action">View Profile</button>
+            </a>
+
+            <!-- User 3 -->
+            <a href="profile.html" class="user-card" style="animation-delay: 0.3s;">
+                <div class="user-avatar-wrap">
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #e87e8a, #802030);">S</div>
+                </div>
+                <div class="user-name">Siddharth Roy</div>
+                <div class="user-role">Editor</div>
+                <div class="user-tags">
+                    <span class="user-tag">Premiere</span>
+                    <span class="user-tag">Colorist</span>
+                </div>
+                <div class="user-stats">
+                    <div class="u-stat"><span class="u-num">540</span><span class="u-label">Connects</span></div>
+                    <div class="u-stat"><span class="u-num">68</span><span class="u-label">Projects</span></div>
+                </div>
+                <button class="card-action">View Profile</button>
+            </a>
+
+            <!-- User 4 -->
+            <a href="profile.html" class="user-card" style="animation-delay: 0.4s;">
+                <div class="user-avatar-wrap">
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #a07ee8, #402080);">V</div>
+                </div>
+                <div class="user-name">Varun Mehta</div>
+                <div class="user-role">Sound Designer</div>
+                <div class="user-tags">
+                    <span class="user-tag">Foley</span>
+                    <span class="user-tag">Mixing</span>
+                </div>
+                <div class="user-stats">
+                    <div class="u-stat"><span class="u-num">312</span><span class="u-label">Connects</span></div>
+                    <div class="u-stat"><span class="u-num">24</span><span class="u-label">Projects</span></div>
+                </div>
+                <button class="card-action">View Profile</button>
+            </a>
+
+            <!-- User 5 -->
+            <a href="profile.html" class="user-card" style="animation-delay: 0.5s;">
+                <div class="user-avatar-wrap">
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #e8c97e, #907020);">K</div>
+                </div>
+                <div class="user-name">Karan Johar</div>
+                <div class="user-role">Producer</div>
+                <div class="user-tags">
+                    <span class="user-tag">Mainstream</span>
+                    <span class="user-tag">TVC</span>
+                </div>
+                <div class="user-stats">
+                    <div class="u-stat"><span class="u-num">5k+</span><span class="u-label">Connects</span></div>
+                    <div class="u-stat"><span class="u-num">120</span><span class="u-label">Projects</span></div>
+                </div>
+                <button class="card-action">View Profile</button>
+            </a>
+
+            <!-- User 6 -->
+            <a href="profile.html" class="user-card" style="animation-delay: 0.6s;">
+                <div class="user-avatar-wrap">
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #7ee8c9, #208060);">D</div>
+                </div>
+                <div class="user-name">Deepika P.</div>
+                <div class="user-role">Art Director</div>
+                <div class="user-tags">
+                    <span class="user-tag">Production Design</span>
+                    <span class="user-tag">Styling</span>
+                </div>
+                <div class="user-stats">
+                    <div class="u-stat"><span class="u-num">890</span><span class="u-label">Connects</span></div>
+                    <div class="u-stat"><span class="u-num">34</span><span class="u-label">Projects</span></div>
+                </div>
+                <button class="card-action">View Profile</button>
+            </a>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/user-sync.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/hud.js"></script>
+    <script src="js/transitions.js"></script>`n</body>
+</html>

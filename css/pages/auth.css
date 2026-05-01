@@ -1,0 +1,207 @@
+/* 
+  Airlock — Auth Flow Styles 
+  Cinematic Glassmorphism & Deep Space Aesthetic
+*/
+
+.airlock-body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* BACKGROUND GLOW */
+.airlock-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(78, 203, 148, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: pulseGlow 8s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlow {
+    from { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    to { opacity: 0.7; transform: translate(-50%, -50%) scale(1.3); }
+}
+
+/* THE PANEL */
+.airlock-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+}
+
+.airlock-panel {
+    background: rgba(10, 10, 12, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    padding: 48px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    text-align: center;
+}
+
+.airlock-header {
+    margin-bottom: 40px;
+}
+
+.logo-large {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+    color: var(--text);
+}
+
+.logo-large span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-alt);
+    border-radius: 50%;
+    margin-left: 4px;
+    box-shadow: 0 0 10px var(--accent-alt);
+}
+
+.airlock-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.airlock-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* FORM STYLES */
+.airlock-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.input-group {
+    position: relative;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 12px 0;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group label {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* ANIMATED PLACEHOLDER */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: -16px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-alt);
+    font-weight: 700;
+}
+
+.input-group input:focus {
+    border-bottom-color: var(--accent-alt);
+    box-shadow: 0 4px 12px rgba(78, 203, 148, 0.05);
+}
+
+/* BUTTON */
+.btn-entry {
+    background: var(--accent-alt);
+    color: #000;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-top: 12px;
+    box-shadow: 0 10px 30px rgba(78, 203, 148, 0.2);
+}
+
+.btn-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(78, 203, 148, 0.3);
+    background: #fff;
+}
+
+.btn-entry:active {
+    transform: translateY(1px);
+}
+
+/* FOOTER */
+.airlock-footer {
+    margin-top: 32px;
+}
+
+.airlock-footer p {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.airlock-footer a {
+    color: var(--accent-alt);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 4px;
+    transition: all 0.2s;
+}
+
+.airlock-footer a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--accent-alt);
+}
+
+/* ERROR MESSAGE */
+.error-glow {
+    font-size: 12px;
+    color: #ff5f5f;
+    background: rgba(255, 95, 95, 0.1);
+    border: 1px solid rgba(255, 95, 95, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: -10px;
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
