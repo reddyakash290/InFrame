@@ -59,6 +59,21 @@ async def get_my_profile(
             "response_rate": "100%" # Still a placeholder
         }
 
+        # 4. Fetch Skills
+        skills_query = text("SELECT skill_name FROM user_skills WHERE user_id = CAST(:user_id AS uuid)")
+        skills_result = await db.execute(skills_query, {"user_id": current_user_id})
+        user_dict["skills"] = [dict(r) for r in skills_result.mappings().all()]
+
+        # 5. Fetch Gear
+        gear_query = text("SELECT name, description FROM user_gear WHERE user_id = CAST(:user_id AS uuid)")
+        gear_result = await db.execute(gear_query, {"user_id": current_user_id})
+        user_dict["gear"] = [dict(r) for r in gear_result.mappings().all()]
+
+        # 6. Fetch Links
+        links_query = text("SELECT platform, url FROM user_links WHERE user_id = CAST(:user_id AS uuid)")
+        links_result = await db.execute(links_query, {"user_id": current_user_id})
+        user_dict["links"] = [dict(r) for r in links_result.mappings().all()]
+
         return user_dict
     except Exception as e:
         print(f"[USERS ERROR] Failed to fetch profile: {str(e)}")

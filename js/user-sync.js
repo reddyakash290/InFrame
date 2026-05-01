@@ -101,6 +101,30 @@ function updateSidebar(user) {
     if (sidebarRole) sidebarRole.textContent = user.role || 'Role not set';
     
     applyAvatarStyles(sidebarAvatar, user);
+
+    // Update sidebar stats if they exist in the DOM
+    if (user.stats) {
+        const sideConnections = document.getElementById('sidebar-stat-connections');
+        if (sideConnections) {
+            sideConnections.innerText = user.stats.connections;
+            const label = sideConnections.nextElementSibling;
+            if (label && label.classList.contains('stat-label')) {
+                label.innerText = user.stats.connections === 1 ? 'Connect' : 'Connects';
+            }
+        }
+
+        const sideProjects = document.getElementById('sidebar-stat-projects');
+        if (sideProjects) {
+            sideProjects.innerText = user.stats.projects;
+            const label = sideProjects.nextElementSibling;
+            if (label && label.classList.contains('stat-label')) {
+                label.innerText = user.stats.projects === 1 ? 'Project' : 'Projects';
+            }
+        }
+
+        const sideViews = document.getElementById('sidebar-stat-views');
+        if (sideViews) sideViews.innerText = user.stats.views;
+    }
 }
 
 /**
@@ -154,6 +178,45 @@ function updateProfilePage(user) {
         if (aboutSections[1]) {
             aboutSections[1].style.display = user.bio ? 'block' : 'none';
         }
+    }
+
+    // Render Skills
+    const skillsContainer = document.getElementById('profile-skills-container');
+    if (skillsContainer && user.skills) {
+        skillsContainer.innerHTML = user.skills.map(s => `<span class="skill-tag">${s.skill_name}</span>`).join('');
+    }
+
+    // Render Gear
+    const gearContainer = document.getElementById('profile-gear-container');
+    if (gearContainer && user.gear) {
+        if (user.gear.length > 0) {
+            gearContainer.innerHTML = user.gear.map(g => `
+                <div class="gear-item">
+                    <div class="gear-icon">⚙️</div>
+                    <div>
+                        <div class="gear-name">${g.name}</div>
+                        <div class="gear-detail">${g.description || ''}</div>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            gearContainer.innerHTML = '<div style="color:var(--muted); font-size:12px; padding:10px;">No gear added yet.</div>';
+        }
+    }
+
+    // Render Links
+    const linksContainer = document.getElementById('profile-links-container');
+    if (linksContainer && user.links) {
+        linksContainer.innerHTML = user.links.map(l => {
+            let icon = '🌐';
+            if (l.platform === 'youtube') icon = '🎬';
+            if (l.platform === 'email') icon = '✉️';
+            
+            // Handle mailto for email
+            const href = l.platform === 'email' ? `mailto:${l.url}` : l.url;
+            
+            return `<a href="${href}" target="_blank" class="social-link" style="text-decoration:none; display:block; color:inherit;">${icon} &nbsp;${l.platform.charAt(0).toUpperCase() + l.platform.slice(1)}</a>`;
+        }).join('');
     }
 
     // Load Portfolio Items

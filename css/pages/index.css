@@ -56,6 +56,8 @@
 .profile-avatar-wrap {
     margin-top: -24px;
     margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .profile-avatar {
